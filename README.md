@@ -1,16 +1,29 @@
 # lab-stm-adc-dma
 Laboratories for the course "Software Development for Embedded Systems" at the TU Freiberg, demonstrating the use of DMA on an STM32 controller.
 
-After deploying one of the laboratory configurations listed below, you have to open a station and start the pyxtermjs server, running on localhost.
 
-The easiest way to do this, is by installing docker and running the following command:
+## Board
+The laboratories were designed for the [STM32F401](https://www.st.com/en/evaluation-tools/nucleo-f401re.html).
 
-```bash
-docker run -it -p 5000:5000 --device=/dev/ttyACM0:/dev/ttyACM0 crosslab/edrys_pyxtermjs_arduino:latest
-```
-This will download the pyxtermjs terminal-server from docker-hub and run it in a secure environment.
 
-Otherwise, you can install the server locally by following the instructions in the [module-pyxtermjs](https://github.com/edrys-labs/module-pyxtermjs).
+## Station
+To host a station, there are two options:
+
+- **Docker Container (more secure)**  
+  Before running the container, the docker image has to be built once from the dockerfile:
+  ```bash
+  docker build -t lab-image .
+  ```
+  Once succesfully built you can run the container:
+  ```bash
+  docker run -it -p 5000:5000 --device=/dev/ttyACM0:/dev/ttyACM0 --mount type=bind,source=/media/$USER/NODE_F401RE,target=/media/NODE_F401RE lab-image:latest
+  ```
+  The container will run the pyxtermjs terminal-server in a secure environment.
+
+- **Local (less secure)**  
+  You can install the server locally by following the instructions in the [module-pyxtermjs](https://github.com/edrys-labs/module-pyxtermjs).
+
+Once the terminal server is running you can add the station by deploying the laboratory and clicking the link under Settings > Station.
 
 
 ## Laboratories
