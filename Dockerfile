@@ -1,16 +1,21 @@
 FROM crosslab/edrys_pyxtermjs_arduino:latest
 
-# switch to root for installations
 USER root
 
-# install OpenOCD for flashing
+# install extra packages
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
-	openocd
+	libusb-1.0-0-dev
 
-# install arduino stm32 package
-RUN arduino-cli core install STMicroelectronics:stm32 --additional-urls https://github.com/stm32duino/BoardManagerFiles/raw/main/package_stmicroelectronics_index.json
+# install platformio
+RUN python3 -m pip install -U platformio
 
-# switch to user
+# copy source projects
+ADD stm32pio_1_blink stm32pio_1_blink
+ADD stm32pio_2_adc_uart stm32pio_2_adc_uart
+ADD stm32pio_3_dma_uart stm32pio_3_dma_uart
+ADD stm32pio_4_adc_dma stm32pio_4_adc_dma
+
+# install stm32 package for board
+RUN pio pkg install -e nucleo_f401re
+
 USER ${user}
-
-

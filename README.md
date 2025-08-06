@@ -9,14 +9,14 @@ The laboratories were designed for the [STM32F401](https://www.st.com/en/evaluat
 ## Station
 To host a station, there are two options:
 
-- **Docker Container (more secure)**  
+- **Docker Container (more secure) (!! not in working state yet !!)**  
   Before running the container, the docker image has to be built once from the dockerfile:
   ```bash
   docker build -t lab-image .
   ```
   Once succesfully built you can run the container:
   ```bash
-  docker run -it -p 5000:5000 --device=/dev/ttyACM0:/dev/ttyACM0 --mount type=bind,source=/media/$USER/NODE_F401RE,target=/media/NODE_F401RE lab-image:latest
+  docker run -it -p 5000:5000 --device=/dev/ttyACM0:/dev/ttyACM0 lab-image:latest --group-add dialout
   ```
   The container will run the pyxtermjs terminal-server in a secure environment.
 
