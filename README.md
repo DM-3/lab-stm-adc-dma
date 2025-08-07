@@ -32,3 +32,9 @@ Once the terminal server is running you can add the station by deploying the lab
 
 ### ADC UART
 [<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/DM-3/lab-stm-adc-dma/main/laboratory/adc_uart.yaml)
+
+### DMA UART
+[<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/DM-3/lab-stm-adc-dma/main/laboratory/dma_uart.yaml)
+
+### ADC DMA
+[<img src="https://img.shields.io/badge/%F0%9F%9A%80%20-%20Deploy%20Lab%20-%20light?style=plastic" height="25" />](https://edrys-labs.github.io/?/deploy/https://raw.githubusercontent.com/DM-3/lab-stm-adc-dma/main/laboratory/adc_dma.yaml)
