@@ -6,7 +6,11 @@ modules:
   - url: https://edrys-labs.github.io/module-markdown-it/index.html
     config:
       content: |
-        ## Introduction to using DMA on an STM32
+        ## Introduction to the STM32-DMA lab
+        The purpose of this first lab is simply
+        to confirm that the setup works and that
+        you're able to upload your code snippets
+        to the board.
     studentConfig:
       content: ''
     teacherConfig:
@@ -22,10 +26,11 @@ modules:
       language: cpp
       theme: light
       editorText: |
-        // minimal blinking LED example
-        #define LED_PIN               GPIO_PIN_5
-        #define LED_GPIO_PORT         GPIOA
-        #define LED_GPIO_CLK_ENABLE() __HAL_RCC_GPIOA_CLK_ENABLE()
+        #include "stm32f4xx_hal.h"
+
+        #define LED_PIN                                GPIO_PIN_5
+        #define LED_GPIO_PORT                          GPIOA
+        #define LED_GPIO_CLK_ENABLE()                  __HAL_RCC_GPIOA_CLK_ENABLE()
 
         int main(void)
         {
@@ -41,13 +46,11 @@ modules:
           GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
           HAL_GPIO_Init(LED_GPIO_PORT, &GPIO_InitStruct); 
 
-          SysTick_Config(SystemCoreClock / 1000);
-
           while (1)
           {
             HAL_GPIO_TogglePin(LED_GPIO_PORT, LED_PIN);
             
-            HAL_Delay(1000);
+            HAL_Delay(100);
           }
         }
       synchronize: false
@@ -56,7 +59,15 @@ modules:
     height: medium
   - url: https://edrys-labs.github.io/module-markdown-it/index.html
     config:
-      content: '## Step 1: Run the code snippet'
+      content: |
+        ## Step 1
+        Run the code snippet and check the terminal output to see
+        whether the upload was successful or any errors occurred.
+
+        ## Step 2
+        Change the code to have the LED blink with a frequency of
+        1 Hz and once again confirm that your updates are correctly
+        executed.
     studentConfig:
       content: ''
     teacherConfig:
@@ -77,18 +88,12 @@ modules:
     stationConfig:
       server: http://localhost:5000/pty
       execute: execute
-      script: >
-        mkdir build 
-
-        mkdir stm32
-
-
-        echo $CODE | base64 --decode > stm32/stm32.ino
-
-
-        arduino-cli compile --fqbn
-        STMicroelectronics:stm32:Nucleo_64:pnum=NUCLEO_F401RE stm32 --build-path
-        build --upload
+      script: |
+        git clone https://github.com/DM-3/lab-stm-adc-dma.git
+        cd lab-stm-adc-dma/stm32pio_1_blink
+        echo $CODE | base64 --decode > src/main.c
+        pio run --target upload
+        cd ../..
       enable:
         teacher: true
         student: true
